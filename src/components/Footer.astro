@@ -1,0 +1,99 @@
+---
+import FooterLogo from "@/assets/img/circle-logo.png";
+import FooterX from "@/assets/img/footer-x.svg";
+import FooterInsta from "@/assets/img/footer-insta.svg";
+import FooterYoutube from "@/assets/img/footer-youtube.svg";
+import FooterLine from "@/assets/img/footer-line.svg";
+import GlobalNav from "@/components/GlobalNav.astro";
+---
+
+<footer class="global__footer">
+  <GlobalNav variant="footer" />
+  <a class="footer__logo-content" href="/">
+    <img src={FooterLogo.src} width={FooterLogo.width} height={FooterLogo.height} alt="犬寝円形ロゴ" decoding="async">
+  </a>
+  <div class="footer__sns-content">
+    <a class="footer__x-icon" href="https://x.com/kennel2212" target="_blank">
+      <img src={FooterX.src} width={FooterX.width} height={FooterX.height} alt="Xアイコン" decoding="async">
+    </a>
+    <a class="footer__insta-icon" href="https://www.instagram.com/kennel4287" target="_blank">
+      <img src={FooterInsta.src} width={FooterInsta.width} height={FooterInsta.height} alt="インスタアイコン" decoding="async">
+    </a>
+    <a class="footer__youtube-icon" href="https://youtube.com/channel/UCNDQd7icdmc3MIzS6AsLSTg?si=WZw__GdfIsnM1-TS" target="_blank">
+      <img src={FooterYoutube.src} width={FooterYoutube.width} height={FooterYoutube.height} alt="ユーチューブアイコン" decoding="async">
+    </a>
+    <a class="footer__line-icon" href="/line">
+      <img src={FooterLine.src} width={FooterLine.width} height={FooterLine.height} alt="ラインアイコン" decoding="async">
+    </a>
+  </div>
+  <p class="ns-jp">copyright© pethotelkennel All Right Reserved</p>
+</footer>
+
+<style>
+.global__footer {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  font-weight: 500;
+  background-color: #7A9B76;
+  overflow: hidden;
+
+  .footer__logo-content {
+    width: 20rem;
+    height: 100%;
+    margin-bottom: 4.0rem;
+    transition: 0.3s ease;
+  }
+  .footer__sns-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2.4rem;
+    margin-bottom: 8.0rem;
+
+    a {
+      width: 4.0rem;
+      height: 100%;
+      transition: 0.3s ease;
+    }
+    img {
+      vertical-align: middle;
+    }
+  }
+  & p {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: #ffffff;
+    padding-bottom: 1.6rem;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .footer__logo-content:hover,
+  .footer__sns-content a:hover {
+    opacity: .7;
+  }
+}
+@media screen and (max-width: 768px) {
+  .global__footer {
+
+    .footer__logo-content {
+      width: 16rem;
+      height: 100%;
+      margin-bottom: 2.4rem;
+    }
+    .footer__sns-content {
+      gap: 1.6rem;
+      margin-bottom: 4.0rem;
+
+      a {
+        width: 2.4rem;
+      }
+    }
+    & p {
+      font-size: 1rem;
+      padding-bottom: .8rem;
+    }
+  }
+}
+</style>

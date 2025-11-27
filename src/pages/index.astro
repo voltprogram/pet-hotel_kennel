@@ -1,0 +1,463 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro"
+import SectionTitle from "@/components/SectionTitle.astro";
+import SectionBtn from "@/components/SectionBtn.astro";
+import HeadingPriceTable from "@/components/HeadingPriceTable.astro";
+import SnsContent from "@/components/SnsContent.astro";
+import { Picture } from "astro:assets";
+import FvImg from "@/assets/img/fv-img01.jpg";
+import UseImg from "@/assets/img/use-img01.jpg";
+import InfoImg from "@/assets/img/store-img.jpg";
+
+---
+
+<BaseLayout title="ペットホテル犬寝｜山梨県笛吹市八代町北｜営業時間 6:00~21:00" description="山梨県笛吹市八代町北にあるペットホテル犬寝は、営業時間6:00〜21:00まで営業しています。常にオーナーが常駐しているため、安心して御利用いただけます。また、ワンちゃんの状態に合わせたお散歩時間や、お手入れ込みのシャンプーなど充実したサービスがありますので、ぜひ御利用ください。">
+	<section id="fv">
+		<figure class="fv__img">
+			<Picture 
+				src={FvImg}
+				alt="黒の柴犬とプードルが向かい合って、会話をしているように見えるしているように見える様子"
+				widths={[1100,1820]}
+				formats={["avif", "webp", "jpeg"]}
+				sizes="100%"
+				loading="eager"
+				decoding="async"
+			/>
+			<div class="fv__txtbox mochiy-pop">
+			<p class="fv__txt">安心<span>を写真で、</span>LINE<span>からお届け</span></p>
+		</div>
+		</figure>
+	</section>
+	<section id="use">
+		<div class="container">
+			<div class="use__content">
+				<figure class="use__img">
+					<Picture 
+						src={UseImg}
+						alt="ドッグランで会話をしているような2匹の犬"
+						formats={["avif", "webp", "jpeg"]}
+						sizes="100%"
+						loading="lazy"
+						decoding="async"
+					/>
+				</figure>
+				<div class="use__txtbox">
+					<SectionTitle
+						main="御利用にあたって"
+						sub="how to use"
+						subAlign="left-center"
+					/>
+					<p class="use__txt">当店ペットホテル犬寝(ケンネル)は、ペットホテル専門店です。お取り扱いのサービスは、宿泊、お預かり、一時お預かり、お散歩、シャンプー、お手入れなど様々なサービスを取り揃えております。</p>
+					<SectionBtn
+					label="御利用にあたって詳細"
+					href="/use"
+					variant="use"
+				/>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section id="price">
+		<div class="container">
+			<div class="price__content">
+				<SectionTitle
+						main="料金"
+						sub="price"
+						subAlign="center"
+				/>
+				<HeadingPriceTable />
+				<p class="price__txt">
+					各サービスは予約制となっております。時間帯によっては希望日時が埋まってしまう可能性がありますので、お早めに御予約をお願いいたします。
+				</p>
+				<SectionBtn
+					label="料金の詳細を見る"
+					href="/price"
+					variant="price"
+				/>
+			</div>
+		</div>
+	</section>
+	<section id="info">
+		<div class="container">
+			<div class="info__content">
+				<div class="info__txtbox">
+					<SectionTitle
+						main="店舗情報"
+						sub="information"
+						subAlign="left-center"
+					/>
+					<h1 class="info__store">ペットホテル犬寝(ケンネル)</h1>
+					<p class="info__address">
+						〒406-0821<br>
+						山梨県笛吹市八代町北3819-2
+					</p>
+					<a class="info__tel" href="tel:07022124287">070-2212-4287</a>
+					<p class="info__hours">営業時間　6:00~21:00</p>
+					<p class="info__holiday">定休日　　不定休</p>
+					<SnsContent />
+				</div>
+				<figure class="info__img">
+					<Picture 
+						src={InfoImg}
+						alt="建物の外観の様子"
+						formats={["avif", "webp", "jpeg"]}
+						sizes="100%"
+						loading="lazy"
+						decoding="async"
+					/>
+				</figure>
+			</div>
+		</div>
+	</section>
+	<section id="access">
+		<div class="container">
+			<div class="access__content">
+			<SectionTitle
+				main="アクセス"
+				sub="access"
+				subAlign="center"
+			/>
+			<div class="access__map">
+				<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3585.9660176977573!2d138.6410631939684!3d35.62592136110865!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x601bfdd13dc13785%3A0x59f43feb3dcedd29!2z44Oa44OD44OI44Ob44OG44Or54qs5a-d!5e0!3m2!1sja!2sjp!4v1762656672972!5m2!1sja!2sjp" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+			</div>
+			</div>
+		</div>
+	</section>
+</BaseLayout>
+
+<style lang="scss">
+#fv {
+	margin: 4.0rem 0;
+	padding: 0 5.0rem;
+	
+	.fv__img {
+		position: relative;
+
+		img {
+			border-radius: 40px;
+		}
+	}
+	.fv__txtbox {
+		position: absolute;
+		bottom: 4.8rem;
+		left: 50%;
+		transform: translate(-50%, 0);
+		background-color: rgba(255, 255, 255, .8);
+		border-radius: 10px;
+
+		.fv__txt {
+			color: #B24759;
+			padding: 2.0rem 4.8rem;
+			font-size: 6.4rem;
+			white-space: nowrap;
+			opacity: 1;
+
+			& span {
+				font-size: 3.2rem;
+			}
+		}
+	}
+}
+#use {
+	background-color: #C6D2C2;
+	padding: 8.0rem 0;
+
+	.use__content {
+		width: 100%;
+		height: 44.0rem;
+		display: flex;
+		align-items: center;
+		background-color: #fff;
+		border-radius: 40px;
+
+		.use__img {
+			width: 50%;
+			height: 100%;
+			
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				border-radius: 40px 0 0 40px;
+			}
+		}
+		.use__txtbox {
+			width: 45%;
+			margin-left: 5%;
+
+			.use__txt {
+				max-width: 34.0rem;
+				width: 100%;
+				font-size: 1.6rem;
+				margin-bottom: 2.4rem;
+			}
+		}
+		.info__img {
+			width: 50%;
+		}
+	}
+}
+#price {
+	margin: 8rem 0;
+
+	.price__content {
+		display: flex;
+		flex-flow: column;
+		align-items: center;
+
+		.price__title {
+			font-size: 2.8rem;
+			font-weight: bold;
+		}
+		.price__subtitle {
+			font-size: 1.6rem;
+			color: #B24759;
+			margin-bottom: 4.0rem;
+		}
+		.price__txt {
+			width: 50%;
+			font-size: 1.6rem;
+			margin-bottom: 4.0rem;
+		}
+	}
+}
+#info {
+	background-color: #C6D2C2;
+	padding: 8rem 0;
+
+	.info__content {
+		width: 100%;
+		height: 44.0rem;
+		display: flex;
+		align-items: center;
+		background-color: #fff;
+		border-radius: 40px;
+
+		.info__txtbox {
+			width: 45%;
+			margin-left: 5%;
+
+			.info__title {
+				font-size: 2.8rem;
+			}
+			.info__subtitle {
+				display: block;
+				color: #B24759;
+				font-size: 1.6rem;
+				margin-bottom: 2.4rem;
+			}
+			.info__store {
+				font-size: 2.8rem;
+				font-weight: 500;
+				margin-bottom: 1.6rem;
+			}
+			.info__address,
+			.info__tel,
+			.info__hours,
+			.info__holiday {
+				font-size: 1.6rem;
+			}
+			.info__tel {
+				text-decoration: underline;
+				transition: .3s ease;
+
+				&::before {
+					content: '☎︎';
+				}
+			}
+			.info__holiday {
+				margin-bottom: 1.6rem;
+			}
+		}
+		.info__img {
+			width: 50%;
+			height: 100%;
+
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				border-radius: 0 40px 40px 0;
+			}
+		}
+	}
+}
+#access {
+	margin: 8rem 0;
+	scroll-margin-top: 18rem; 
+
+	.access__content {
+		display: flex;
+		flex-flow: column;
+		align-items: center;
+
+		.access__map {
+			width: 100%;
+			height: 48rem;
+
+			iframe {
+					width: 100%;
+					height: 100%;
+					border-radius: 40px;
+					display: block;
+			}
+		}
+	}
+}
+@media screen and (min-width: 769px) {
+	.info__tel:hover {
+		opacity: .7;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	#fv {
+		margin: 1.6rem 0;
+		padding: 0 calc( 5 / 375 * 100%);
+
+		.fv__img {
+			height: 36rem;
+
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				border-radius: 32px;
+			}
+		}
+		.fv__txtbox {
+			bottom: .8rem;
+
+			.fv__txt {
+				padding: .8rem 1.2rem;
+				font-size: 2.8rem;
+
+				& span {
+					font-size: 1.6rem;
+				}
+			}
+		}
+	}
+	#use {
+		padding: 4.0rem 0;
+
+		.use__content {
+			height: 100%;
+			flex-flow: column;
+			border-radius: 32px;
+
+			.use__img {
+				width: 100%;
+				height: 100%;
+				
+				img {
+					height: 24rem;
+					border-radius: 32px 32px 0 0;
+				}
+			}
+			.use__txtbox {
+				width: 100%;
+				margin-left: 0;
+				display: flex;
+				flex-flow: column;
+				align-items: center;
+				padding: 1.6rem;
+				font-size: 1.4rem;
+
+				.use__txt {
+					max-width: 34.0rem;
+					width: 100%;
+					font-size: 1.4rem;
+					margin-bottom: 2.4rem;
+				}
+			}
+		}
+	}
+	#price {
+		margin: 4rem 0;
+
+		.price__content {
+
+			.price__title {
+				font-size: 2.4rem;
+			}
+			.price__subtitle {
+				font-size: 1.2rem;
+				margin-bottom: 2.4rem;
+			}
+			.price__txt {
+				width: 100%;
+				max-width: 56rem;
+				font-size: 1.4rem;
+				margin-bottom: 2.4rem;
+			}
+		}
+	}
+	#info {
+		padding: 4.0rem 0;
+
+		.info__content {
+			height: 100%;
+			flex-flow: column-reverse;
+			align-items: center;
+			border-radius: 32px;
+
+			.info__txtbox {
+				width: 100%;
+				margin-left: 0;
+				display: flex;
+				flex-flow: column;
+				align-items: center;
+				padding: 1.6rem 0;
+
+				.info__title {
+					font-size: 2.4rem;
+				}
+				.info__subtitle {
+					font-size: 1.2rem;
+					margin-bottom: 1.6rem;
+				}
+				.info__store {
+					font-size: 2.4rem;
+					font-weight: 500;
+					margin-bottom: 1.6rem;
+				}
+				.info__address,
+				.info__tel,
+				.info__hours,
+				.info__holiday {
+					width: 100%;
+					max-width: 20rem;
+					font-size: 1.4rem;
+				}
+				.info__holiday {
+					margin-bottom: .8rem;
+				}
+			}
+			.info__img {
+				width: 100%;
+				height: 24rem;
+
+				img {
+					border-radius: 32px 32px 0 0;
+				}
+			}
+		}
+	}
+	#access {
+		margin: 4rem 0;
+		scroll-margin-top: 14rem; 
+
+		.access__content {
+
+			.access__map {
+				height: 40rem;
+
+				iframe {
+						border-radius: 32px;
+				}
+			}
+		}
+	}
+}
+</style>

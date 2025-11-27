@@ -1,0 +1,90 @@
+---
+interface Props {
+  variant?: "header" | "content";
+}
+const {variant = "content"} = Astro.props;
+import X from "@/assets/img/x.svg";
+import Insta from "@/assets/img/insta.svg";
+import Youtube from "@/assets/img/youtube.svg";
+import Line from "@/assets/img/line.svg";
+---
+
+<div class={`sns__${variant}`}>
+  <a class="x__icon" href="https://x.com/kennel2212" target="_blank">
+    <img src={X.src} width={X.width} height={X.height} alt="Xアイコン" decoding="async">
+  </a>
+  <a class="insta__icon" href="https://www.instagram.com/kennel4287" target="_blank">
+    <img src={Insta.src} width={Insta.width} height={Insta.height} alt="インスタアイコン" decoding="async">
+  </a>
+  <a class="youtube__icon" href="https://youtube.com/channel/UCNDQd7icdmc3MIzS6AsLSTg?si=WZw__GdfIsnM1-TS" target="_blank">
+    <img src={Youtube.src} width={Youtube.width} height={Youtube.height} alt="ユーチューブアイコン" decoding="async">
+  </a>
+  <a class="line__icon" href="/line">
+    <img src={Line.src} width={Line.width} height={Line.height} alt="ラインアイコン" decoding="async">
+  </a>
+</div>
+
+<style>
+.sns__content {
+  display: flex;
+  gap: 1.6rem;
+
+  a {
+    width:4.8rem;
+    height: 4.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #4F6F52;
+    border-radius: 50%;
+    transition: .3s ease;
+
+    img {
+      width: 2.8rem;
+      height: 100%;
+    }
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .sns__content a:hover {
+    opacity: .7;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .sns__header {
+    display: flex;
+    gap: 1.6rem;
+    margin-bottom: 4rem;
+
+    a {
+      width:4.8rem;
+      height: 4.8rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid #4F6F52;
+      border-radius: 50%;
+
+      img {
+        width: 2.8rem;
+        height:100%;
+      }
+    }
+  }
+  .sns__content {
+    gap: 1.2rem;
+
+    a {
+      width:3.2rem;
+      height: 3.2rem;
+
+      img {
+        width: 2rem;
+        height: 100%;
+      }
+    }
+  }
+}
+</style>

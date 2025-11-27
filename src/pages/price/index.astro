@@ -1,0 +1,239 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageTitle from "@/components/PageTitle.astro";
+import TextTitle from "@/components/TextTitle.astro";
+import HotelPriceTable from "@/components/HotelPriceTable.astro";
+import CarePriceTable from "@/components/CarePriceTable.astro";
+---
+
+<BaseLayout title="料金｜ペットホテル犬寝" description="料金は年中、同一料金(税込価格)となります。提示しております料金表も最大料金での表示となりますので、延長料金以外の料金は発生いたしません。他にも不明点などがあればお問い合わせ下さい。お支払い方法は、現金、各種クレジットカード決済、各種QRコード決済に対応しております。クレジットカード決済の種類とQRコード決済の種類は御予約時、またはお支払い時に当スタッフにお尋ねください。">
+  <div id="price__pages">
+    <div class="container">
+      <PageTitle
+        title="料金一覧"
+      />
+      <p class="tax__txt">
+        ※年中、同一料金(税込価格)となります。
+      </p>
+      <TextTitle
+        title="ホテル料金"
+      />
+      <HotelPriceTable
+      />
+      <TextTitle
+        title="お手入れ料金"
+      />
+      <CarePriceTable
+      />
+      <div class="care__content">
+        <p class="care__title">お手入れ内容</p>
+        <p class="care__txt">
+          ウルトラファインバブル＋塩素除去されたシャワーを使ったシャンプー<br>
+          &<br>
+          ​お手入れ
+        </p>
+        <p class="care__subtxt">
+          (爪切り / 肛門腺縛り / 足裏バリカン / 耳掃除 / 肉球ケア / マッサージ)
+        </p>
+      </div>
+      <TextTitle
+        title="御予約について"
+      />
+      <p class="price-page__txt">
+        各サービスは予約制となっております。受付時間は6:00〜21:00まで。<br class="pc__only">
+        時間帯によっては希望の時間帯が埋まってしまう可能性がありますので、早めに御予約をお願い致します。<br class="pc__only">
+        御予約の御連絡が状況によっては出られない場合もありますが、必ず折り返し御連絡をさせて頂きます。<br class="pc__only">
+        当ホテルでは事前に御予約が無い日を店舗の休日とさせて頂きますので、当日予約の場合お受けできない場合がありますので御注意下さい。<br class="pc__only">
+        お預かり時間には、お会計や、当ホテルのシステム説明、契約などの時間は含まれません。
+      </p>
+      <TextTitle
+        title="お支払い方法"
+      />
+      <p class="price-page__txt">
+        お支払い方法は、現金、各種クレジットカード決済、各種QRコード決済に対応しております。<br class="pc__only">
+        クレジットカード決済の種類とQRコード決済の種類は御予約時、またはお支払い時にお尋ねください。
+      </p>
+      <TextTitle
+        title="その他料金"
+      />
+      <p class="price-page__txt">
+        当ホテルでは、爬虫類(トカゲなど)、小動物(ハムスターなど)、鳥類(インコなど)も預からせていただきます。ただし、飼育ケースや、鳥かごなどのままお持ちいただく必要がありますので御相談ください。料金は1,000円~2,000円になります。
+      </p>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+#price__pages {
+  width: 100%;
+  margin: 8rem 0;
+
+  .tax__txt {
+    font-size: 1.6rem;
+    text-align: center;
+    margin: -4rem 0 4rem;
+  }
+  .care-price__pc-table {
+    width: 100%;
+    max-width: 80.0rem;
+    background-color: #fff;
+    text-align: center;
+    table-layout: fixed;
+    border-collapse: collapse;
+    border-radius: 20px;
+    overflow: hidden;
+    margin: 0 auto 4.0rem;
+
+    tr:nth-child(1) {
+      color: #ffffff;
+      background-color: #C37380;
+      font-weight: 500;
+    }
+    tr:nth-child(1) th {
+      border-top: none;
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    th,
+    td {
+      padding: 1.4rem 0 1.2rem;
+      border: 1px solid #B24759;
+    }
+    th:last-child,
+    td:last-child{
+      border-right: none;
+    }
+    th:nth-child(1),
+    td:nth-child(1) {
+      border-left: none;
+    }
+  }
+  .care-price__sp-table {
+    display: none;
+    width: 100%;
+    max-width: 56rem;
+    background-color: #fff;
+    text-align: center;
+    table-layout: fixed;
+    border-collapse: collapse;
+    border-radius: 16px;
+    overflow: hidden;
+    margin: 0 auto 2.4rem;
+    font-weight: 500;
+
+    th,
+    td {
+      padding: .8rem 0;
+      border: 1px solid #B24759;
+    }
+    th,
+    td {
+      border-left: none;
+      border-right: none;
+    }
+    td:last-child {
+      border-bottom: none;
+    }
+    th {
+      color: #ffffff;
+      background-color: #C37380;
+      border-top: none;
+    }
+    td span {
+      margin-left: 6.4rem;
+      font-weight: 400;
+    }
+  }
+  .care__content {
+    width: 100%;
+    max-width: 80rem;
+    background-color: #ffffff;
+    border-radius: 40px;
+    margin: 0 auto 4rem;
+    padding: 2.4rem 0;
+    text-align: center;
+
+    .care__title {
+      font-size: 2.4rem;
+      font-weight: 500;
+      color: #B24759;
+      margin-bottom: 1.6rem;
+    }
+    .care__txt {
+      font-weight: 500;
+      margin-bottom: .8rem;
+    }
+    .care__subtxt {
+      font-size: 1.6rem;
+    }
+  }
+  .price-page__txt {
+    margin-bottom: 5.6rem;
+  }
+}
+@media screen and (max-width: 768px) {
+  #price__pages {
+    margin: 4rem 0;
+
+    .tax__txt {
+      font-size: 1.2rem;
+      margin: -.8rem 0 2.4rem;
+    }
+    .care__pc-table {
+      display: none;
+    }
+    .care__sp-table {
+      display: table;
+
+    tr {
+      width: 100%;
+    }
+    th,
+    td {
+      padding: .8rem 0;
+      border: 1px solid #B24759;
+    }
+    th,
+    td {
+      border-left: none;
+      border-right: none;
+    }
+    td:last-child {
+      border-bottom: none;
+    }
+    th {
+      color: #ffffff;
+      background-color: #C37380;
+      border-top: none;
+    }
+    td span {
+      margin-left: 6.4rem;
+      font-weight: 400;
+    }
+  }
+    .care__content {
+      max-width: 56rem;
+      border-radius: 40px;
+      margin: 0 auto 2.4rem;
+      padding: 1.6rem;
+      text-align: center;
+
+      .care__title {
+        font-size: 2rem;
+        margin-bottom: 1.6rem;
+      }
+      .care__txt {
+        font-size: 1.6rem;
+        margin-bottom: .8rem;
+      }
+      .care__subtxt {
+        font-size: 1.2rem;
+      }
+    }
+    .price-page__txt {
+      margin-bottom: 2.4rem;
+    }
+  }
+}
+</style>

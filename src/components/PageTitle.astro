@@ -1,0 +1,41 @@
+---
+interface Props {
+  title: string;
+}
+
+const {title} = Astro.props;
+---
+
+<h2 class="page__title">{title}</h2>
+
+<style>
+.page__title {
+  position: relative;
+  font-size: 4.0rem;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 8rem;
+
+  &::after {
+    content: '';
+    width: 8.0rem;
+    height: 4px;
+    display: inline-block;
+    background-color: #B24759;
+    position: absolute;
+    bottom: -1.2rem;
+    left: calc(50% - 4rem)
+  }
+}
+@media screen and (max-width: 768px) {
+  .page__title {
+    font-size: 2.8rem;
+    margin-bottom: 4rem;
+
+    &::after {
+      width: 6.4rem;
+      left: calc(50% - 3.2rem)
+    }
+  }
+}
+</style>

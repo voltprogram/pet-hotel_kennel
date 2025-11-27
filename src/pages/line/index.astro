@@ -1,0 +1,285 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageTitle from "@/components/PageTitle.astro";
+import TextTitle from "@/components/TextTitle.astro";
+import LineQr from "@/assets/img/line-qrcode.jpg";
+---
+
+<BaseLayout title="LINE予約｜ペットホテル犬寝" description="LINE 予約｜当店ではLINEでの友達を募集しています!!LINEでいつでもどこでもお気軽に御予約、またはお問い合わせが可能です。また、当店は個人経営ですので、どうしても電話に出られない状況もあります。そのような場合の時でもLINEでのお問い合わせがあれば、折り返しの御連絡をスムーズに行うことができますので、御手数をお掛けしてしまいますが、LINEでの御予約や、お問い合わせをお奨めしております。">
+  <div id="line__content">
+    <div class="container">
+      <PageTitle
+        title="LINE予約"
+      />
+      <div class="line__txtbox">
+        <p class="line__title">当店ではLINE での友だちを募集しています!!</p>
+        <p class="line__txt">LINE でいつでもどこでもお気軽にご予約またはお問い合わせが可能です。</p>
+      </div>
+      <TextTitle
+        title="友だち追加方法"
+      />
+      <p class="under__spaced">
+        友だち追加方法は2パターンあります。<br>
+        ①LINEメニューの『友達追加』→『ID検索』で下記のIDを検索する。<br>
+        <span>
+          アカウント名：ペットホテル犬寝<br>
+          LINE ID：kennel1122
+        </span>
+      </p>
+      <p class="under__spaced">
+        ②下記の『QRコード』を読み取って友だち追加をする。
+      </p>
+      <div class="qr-code__content">
+        <p class="qr-code__title">QRコード</p>
+        <img src={LineQr.src} width={LineQr.width} height={LineQr.src} alt="ラインのQRコード" decoding="async">
+        <p class="qr-code__txt">上記のQRコードを読み取って<br>追加してください。</p>
+      </div>
+      <div class="qr-reading__content">
+        <div class="pc__qr-reading">
+          <p class="pc__title">PCの画面から読み取る方法</p>
+          <p class="pc__txt">
+            1.LINEアプリを起動<br>
+            ↓<br>
+            2.ホーム画面右上の友だち<br>
+            「追加ボタン（＋ボタン）」を選択<br>
+            ↓<br>
+            3.「QRコード」を選択
+          </p>
+        </div>
+        <div class="sp__qr-reading">
+          <p class="sp__title">スマートフォンから読み取る方法</p>
+          <p class="sp__txt">
+            1.上のQRコードを<br>
+            スクリーンショットして保存<br>
+            ​↓<br>
+            2.LINEアプリを起動<br>
+            ↓<br>
+            3.ホーム画面右上の友だち「追加ボタン<br>
+            （＋ボタン）」を選択<br>
+            ↓<br>
+            4.「QRコード」を選択<br>
+            ↓<br>
+            5.画面右下に表示されている「画像選択」<br>
+            部分をタップし、写真のライブラリを起動<br>
+            ​↓<br>
+            6.1で保存したQRコードの<br>
+            スクリーンショットを選択
+          </p>
+        </div>
+      </div>
+      <TextTitle
+          title="LINEお問い合わせ方法"
+        />
+        <p class="under__spaced">トーク画面を開いていただき<span>①飼い主様氏名②ご予約またはお問い合わせ内容</span>の2項目のご記入をお願いします。</p>
+        <p class="under__spaced">※2回目以降のお客様は<span>①飼い主様氏名</span>は不要です。</p>
+        <p class="under__spaced">下記に例文を掲載しておりますのでそちらを参考にしてください。</p>
+        <div class="line__example-content">
+          <div class="line__example-left">
+            <p class="line__example-title">ご予約例文​</p>
+            <div class="line__example-bg">
+              <p class="line__example-txt--spaced">〇〇​〇〇といいます。</p>
+              <p class="line__example-txt">〇月〇日の〇時に1泊で予約したいのですが、空いていますか？</p>
+            </div>
+          </div>
+          <div class="line__example-right">
+            <p class="line__example-title">お問い合わせ例文​</p>
+            <div class="line__example-bg">
+              <p class="line__example-txt--spaced">〇〇​〇〇と申します。</p>
+              <p class="line__example-txt">2泊3日の旅行に行くので、その間預かってもらいたいのですが、その場合の料金はどれくらいかかりますか？</p>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+#line__content {
+  margin: 8rem 0;
+
+  .line__txtbox {
+    text-align: center;
+    color: #ffffff;
+    background-color: #06C755;
+    margin: 0 calc(50% - 50vw) 4rem;
+    padding: 2.4rem 0;
+
+    .line__title {
+      font-size: 4rem;
+      font-weight: 700;
+      margin-bottom: 1.6rem;
+    }
+  }
+  .under__spaced {
+    margin-bottom: 2.4rem;
+
+    span {
+      color: #B24759;
+      font-weight: 700;
+    }
+  }
+  .qr-code__content {
+    width: 100%;
+    max-width: 56rem;
+    height: 100%;
+    max-height: 56rem;
+    background-color: #C6D2C2;
+    margin: 0 auto 5.6rem;
+    padding: 2.4rem 0;
+    border-radius: 40px;
+    text-align: center;
+
+    .qr-code__title {
+      font-size: 3.2rem;
+      font-weight: 500;
+      margin-bottom: 2.4rem;
+    }
+    img {
+      width: 100%;
+      max-width: 28rem;
+      height: 100%;
+      margin-bottom: 2.4rem;
+    }
+    .qr-code__txt {
+      font-size: 3.2rem;
+      font-weight: 500;
+    }
+  }
+  .qr-reading__content {
+    display: flex;
+    justify-content: center;
+    gap: 16rem;
+    margin-bottom: 5.6rem;
+
+    .pc__qr-reading,
+    .sp__qr-reading {
+      width: 100%;
+      max-width: 38rem;
+      text-align: center;
+    }
+    .pc__title,
+    .sp__title {
+      font-weight: 500;
+      color: #ffffff;
+      background-color: #B24759;
+      padding: 2.4rem 0;
+      border-radius: 24px;
+      margin-bottom: 4rem;
+    }
+  }
+  .line__example-content {
+    width: 100%;
+    background-color: #86ACE2;
+    padding: 4rem 2.4rem;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+
+    .line__example-left,
+    .line__example-right {
+      width: 46%;
+    }
+    .line__example-title {
+      margin-bottom: 2.4rem;
+    }
+    .line__example-bg {
+      position: relative;
+      font-size: 1.6rem;
+      background-color: #ffffff;
+      border-radius: 24px;
+      padding: 2.4rem;
+
+      &::after {
+        content: "";
+        display: block;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-color: transparent transparent transparent #ffffff;
+        border-width: 15px 0px 15px 30px;
+        position: absolute;
+        right: -1.6rem;
+        bottom: calc(50% - 1.6rem);
+      }
+
+      .line__example-txt--spaced {
+        margin-bottom: 1.6rem;
+      }
+    }
+  }
+}
+@media screen and (max-width: 768px) {
+  #line__content {
+    margin: 4rem 0;
+
+    .line__txtbox {
+      padding: 1.6rem 0;
+
+      .line__title {
+        font-size: 2.8rem;
+        margin-bottom: .8rem;
+      }
+    }
+    .under__spaced {
+      margin-bottom: 1.6rem;
+    }
+    .qr-code__content {
+      margin: 0 auto 2.4rem;
+      padding: 1.6rem 0;
+
+      .qr-code__title {
+        font-size: 2.4rem;
+        margin-bottom: 1.6rem;
+      }
+      img {
+        max-width: 20rem;
+        margin-bottom: 1.6rem;
+      }
+      .qr-code__txt {
+        font-size: 2.4rem;
+      }
+    }
+    .qr-reading__content {
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+      gap: 2.4rem;
+      margin-bottom: 2.4rem;
+
+      .pc__title,
+      .sp__title {
+        width: 100%;
+        max-width: 32rem;
+        font-size: 1.4rem;
+        padding: 1.6rem 0;
+        border-radius: 16px;
+        margin: 0 auto 1.6rem;
+      }
+    }
+    .line__example-content {
+      width: 100%;
+      max-width: 56rem;
+      padding: 2.4rem 1.6rem;
+      display: flex;
+      flex-flow: column;
+      gap: 2.4rem;
+
+      .line__example-left,
+      .line__example-right {
+        width: 100%;
+      }
+      .line__example-title {
+        margin-bottom: .8rem;
+      }
+      .line__example-bg {
+        font-size: 1.4rem;
+        border-radius: 16px;
+
+        .line__example-txt--spaced {
+          margin-bottom: 1.6rem;
+        }
+      }
+    }
+  }
+}
+</style>

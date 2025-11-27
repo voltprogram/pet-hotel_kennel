@@ -1,0 +1,58 @@
+---
+---
+
+<table class="care-price__table">
+  <tr>
+    <th>小型犬</th>
+    <th>中型犬</th>
+    <th>大型犬</th>
+  </tr>
+  <tr>
+    <td>￥2,000</td>
+    <td>￥3,000</td>
+    <td>￥4,000</td>
+  </tr>
+</table>
+
+<style>
+.care-price__table {
+  width: 100%;
+  max-width: 80.0rem;
+  background-color: #fff;
+  text-align: center;
+  table-layout: fixed;
+  border-collapse: collapse;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 0 auto 4.0rem;
+
+  tr:nth-child(1) {
+    color: #ffffff;
+    background-color: #C37380;
+    border-bottom: 1px solid #B24759;
+  }
+  th,
+  td {
+    padding: 1.4rem 0 1.2rem;
+    border-right: 1px solid #B24759;
+  }
+  th:last-child,
+  td:last-child {
+    border-right: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .care-price__table {
+    max-width: 56rem;
+    border-radius: 16px;
+    margin: 0 auto 2.4rem;
+
+    th,
+    td {
+      padding: .8rem 0;
+      border-right: 1px solid #B24759;
+    }
+  }
+}
+</style>

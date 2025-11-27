@@ -1,0 +1,112 @@
+---
+const { variant = "header" } = Astro.props;
+
+const navItems = [
+  { label: '御利用にあたって', path: '/use'},
+  { label: '料金', path: '/price'},
+  // { label: '予約状況', path: '/reserve'},
+  { label: 'アクセス', path: '/#access'},
+  { label: '利用規約', path: '/agreement'},
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<nav class={`global__nav ${variant}`}>
+  <ul>
+    {navItems.map((item) => {
+      const isActive =
+        item.path === "/"
+          ? currentPath === item.path
+          : currentPath.startsWith(item.path);
+      return (
+        <li>
+          <a href={item.path} class={isActive ? "active" : ""}>{item.label}</a>
+        </li>
+      );
+    })}
+  </ul>
+</nav>
+
+<style>
+.global__nav.header {
+  max-width: 108.0rem;
+  width: 100%;
+  margin: 1.6rem auto 0;
+  
+  ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+  }
+  a {
+    transition: .3s ease;
+
+    &.active {
+      color: #B24759;
+    }
+  }
+}
+.global__nav.footer {
+  width: 100%;
+  padding-top: 2.4rem;
+
+  ul {
+    display: flex;
+    justify-content: center;
+    gap: 3.2rem;
+    padding-bottom: 4.0rem;
+    
+    a {
+      color: #ffffff;
+      transition: 0.3s ease;
+
+      &.active {
+       color: #B24759;
+      }
+    }
+  }
+}
+@media screen and (min-width: 769px) {
+  .global__nav.header a:hover,
+  .global__nav.footer a:hover {
+    opacity: .7;
+  }
+}
+@media screen and (max-width: 768px) {
+  .global__nav.header {
+  width: 100%;
+  margin: 0 auto;
+  padding-bottom: 4rem;
+  
+  ul {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    font-size: 2rem;
+    gap: 3.2rem;
+  }
+}
+  .global__nav.footer {
+    width: 100%;
+    padding-top: 1.6rem;
+
+    ul {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2em 4.8rem;
+      padding-bottom: 2.4rem;
+
+      li:nth-child(1),
+      li:nth-child(3) {
+        text-align: right;
+      }
+      li:nth-child(2),
+      li:last-child {
+        text-align: left;
+      }
+    }
+  }
+}
+</style>

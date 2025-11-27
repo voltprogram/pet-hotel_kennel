@@ -1,0 +1,21 @@
+{
+  "name": "pet-hotel_kennel",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@fontsource-variable/noto-sans-jp": "^5.2.9",
+    "@fontsource/m-plus-rounded-1c": "^5.2.9",
+    "@fontsource/mochiy-pop-one": "^5.2.8",
+    "astro": "^5.15.1",
+    "sass": "^1.93.2"
+  },
+  "devDependencies": {
+    "postcss-preset-env": "^10.4.0"
+  }
+}

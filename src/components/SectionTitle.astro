@@ -1,0 +1,60 @@
+---
+interface Props {
+  main: string;
+  sub?: string;
+  subAlign?: "center" | "left-center";
+}
+
+const {main, sub, subAlign = "center"} = Astro.props;
+---
+
+<div class="section-title">
+  <h2 class="section-title__main">{main}</h2>
+  {sub && (
+    <p class={`section-title__sub section-title__sub--${subAlign}`}>{sub}</p>
+  )}
+</div>
+
+<style lang="scss">
+.section-title {
+  display: block;
+
+  .section-title__main {
+    font-size: 2.8rem;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: .8rem;
+  }
+  .section-title__sub {
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: #B24759;
+  }
+  .section-title__sub--center {
+    text-align: center;
+    margin-bottom: 4.0rem;
+  }
+  .section-title__sub--left-center {
+    text-align: left;
+    margin-bottom: 2.4rem;
+  }
+}
+@media screen and (max-width: 768px) {
+  .section-title {
+
+    .section-title__main {
+      font-size: 2.4rem;
+    }
+    .section-title__sub {
+      font-size: 1.2rem;
+    }
+    .section-title__sub--center {
+      margin-bottom: 1.6rem;
+    }
+    .section-title__sub--left-center {
+      text-align: center;
+      margin-bottom: .8rem;
+    }
+  }
+}
+</style>

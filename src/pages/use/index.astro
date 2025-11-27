@@ -1,0 +1,97 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageTitle from "@/components/PageTitle.astro";
+import TextTitle from "@/components/TextTitle.astro";
+import Point from "@/components/Point.astro";
+---
+
+<BaseLayout title="御利用にあたって｜ペットホテル犬寝" description="サービス内容は、宿泊、お預かり、一時お預かり、お散歩、シャンプー、お手入れ(爪切り、肛門腺絞り、足裏バリカン、耳掃除、肉球ケア、マッサージ)、など様々なサービスを取り揃えておりますので、御不明点や気になる点がございましたらお気軽にお問い合わせください。">
+  <div id="use__pages">
+    <div class="container">
+      <PageTitle
+        title="御利用にあたって"
+      />
+      <TextTitle
+        title="ペットホテル犬寝とは"
+      />
+      <p class="use-page__txt">
+        当店ペットホテル犬寝(ケンネル)は、ペットホテル専門店です。<br class="pc__only">
+        営業時間は6:00〜21:00不定休で営業しておりますので事前予約が必要となります。<br class="pc__only">
+        ペットホテルを初めてご利用されるお客様も、オーナーが24時間常に駐在しておりますので安心してご利用いただけます。
+      </p>
+      <TextTitle
+        title="御利用にあたって"
+      />
+      <div class="use-page__txt">
+        <p class="under__spaced">
+          ワンちゃんの場合<br class="pc__only">
+          狂犬病ワクチン(鑑札可)と混合ワクチン（5種以上）の接種証明証。
+        </p>
+        <p class="under__spaced">
+          猫ちゃんの場合<br class="pc__only">
+          混合ワクチン(3種以上)の接種証明証。
+        </p>
+        <p class="under__spaced">
+          ※初回、年1回ご提示いただきます。(コピー可)何らかの理由によって接種していない場合は、動物病院より発行される猶予証明証（抗体価検査表など）をお持ちください。<br class="pc__only">
+          また、年齢や、疾患などによる接種が出来ない場合は事前にお伝え下さい。<br class="pc__only">
+          接種証明書の内容によっては、病院に確認をとらせていただきます。<br class="pc__only">
+          小動物(エキゾチックアニマル)の場合、普段使用しているケージなどの設備。
+        </p>
+        <p>
+          ※上記の持ち物は忘れずにお持ち頂く事になります。不備があった場合には当日でもお預かりできなくなりますのでご了承ください。
+        </p>
+      </div>
+      <TextTitle
+        title="ケンネルのこだわり"
+      />
+      <Point
+        tag="こだわりポイント1"
+        title="運動をしっかり"
+        text="当店は、運動の時間をとても大事にしています。「ただ預けるだけ」ではなく、ワンちゃん・ネコちゃんがのびのび過ごせるように、広いスペースでしっかり体を動かしてもらっています。ストレス発散にもなり、おうちに帰ってもいつも通り元気に過ごせるように、運動タイムを欠かしません。"
+      />
+      <Point
+        tag="こだわりポイント2"
+        title="お預かり中の様子をLINEで写真とともに送る"
+        text="大切な御家族をお預かりしている間も、安心していただけるよう、滞在中の様子をLINEで写真付きで御報告しています。リラックスしている様子やごはんの様子、お散歩の風景など、その子の様子がよく分かるように心がけています。"
+      />
+      <TextTitle
+        title="資格各種"
+      />
+      <p>
+        第一種動物取扱業 第3231011号 保管<br>
+        登録年月日 令和5年12月15日<br>
+        有効期限 令和10年12月14日<br>
+        動物取扱責任者 高山 順元<br>
+        愛玩動物飼養管理士2級、認定ペットシッター、愛玩動物看護士、愛玩動物救命士、犬の行動生活アドバイザー、犬の健康生活管理士、犬の皮膚被毛ケアリスト、介護福祉士
+      </p>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+#use__pages {
+  width: 100%;
+  margin: 8rem 0;
+
+  .use-page__txt {
+    margin-bottom: 5.6rem;
+
+    .under__spaced {
+      margin-bottom: 2.4rem;
+    }
+  }
+}
+@media screen and (max-width: 768px) {
+  #use__pages {
+    margin: 4rem 0;
+
+    .use-page__txt {
+      margin-bottom: 2.4rem;
+
+      .under__spaced {
+        margin-bottom: 1.6rem;
+      }
+    }
+  }
+}
+</style>

@@ -1,0 +1,114 @@
+---
+---
+
+<table class="heading-price__pc-table">
+  <tr>
+    <th>宿泊時間</th>
+    <td>猫</td>
+    <td>小型犬</td>
+    <td>中型犬</td>
+    <td>大型犬</td>
+  </tr>
+  <tr>
+    <th>一泊(24時間)</th>
+    <td>￥3,000</td>
+    <td>￥4,000</td>
+    <td>￥5,000</td>
+    <td>￥6,000</td>
+  </tr>
+</table>
+<div class="heading-price__sp-table">
+  <div class="heading-price__title-row">
+    <p>一泊(24時間)</p>
+  </div>
+  <div class="heading-price__item-row">
+    <p class="heading-price__item-name">猫</p>
+    <p class="heading-price__item-price">￥3,000</p>
+  </div>
+  <div class="heading-price__item-row">
+    <p class="heading-price__item-name">小型犬</p>
+    <p class="heading-price__item-price">￥4,000</p>
+  </div>
+  <div class="heading-price__item-row">
+    <p class="heading-price__item-name">中型犬</p>
+    <p class="heading-price__item-price">￥5,000</p>
+  </div>
+  <div class="heading-price__item-row">
+    <p class="heading-price__item-name">大型犬</p>
+    <p class="heading-price__item-price">￥6,000</p>
+  </div>
+</div>
+
+<style>
+.heading-price__pc-table {
+  width: 100%;
+  max-width: 80.0rem;
+  background-color: #fff;
+  text-align: center;
+  table-layout: fixed;
+  border-collapse: collapse;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 0 auto 4.0rem;
+
+  tr:nth-child(1) {
+    color: #ffffff;
+    background-color: #C37380;
+    border-bottom: 1px solid #B24759;
+  }
+  td:last-child {
+  }
+  th,
+  td {
+    padding: 1.4rem 0 1.2rem;
+    border-right: 1px solid #B24759;
+  }
+  th {
+    font-weight: 500;
+  }
+  th:last-child,
+  td:last-child {
+    border-right: none;
+  }
+}
+.heading-price__sp-table {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .heading-price__pc-table {
+    display: none;
+  }
+  .heading-price__sp-table {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    max-width: 56rem;
+    background-color: #fff;
+    text-align: center;
+    border-radius: 16px;
+    overflow: hidden;
+    margin: 0 auto 2.4rem;
+
+    .heading-price__title-row {
+      background-color: #C37380;
+      color: #ffffff;
+      font-weight: 500;
+      padding: .8rem 0;
+    }
+    .heading-price__item-row {
+      display: flex;
+      justify-content: space-between;
+      padding: .8rem 16%;
+      border-top: 1px solid #B24759;
+
+      .heading-price__item-name {
+        font-weight: 500;
+      }
+      .heading-price__item-price {
+
+      }
+    }
+  }
+}
+</style>

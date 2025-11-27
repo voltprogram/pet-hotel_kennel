@@ -1,0 +1,283 @@
+---
+---
+
+<table class="hotel-price__pc-table">
+  <tr>
+    <th>宿泊時間</th>
+    <td>猫</td>
+    <td>小型犬</td>
+    <td>中型犬</td>
+    <td>大型犬</td>
+  </tr>
+  <tr>
+    <th>一泊(24時間)</th>
+    <td>￥3,000</td>
+    <td>￥4,000</td>
+    <td>￥5,000</td>
+    <td>￥6,000</td>
+  </tr>
+  <tr>
+    <th>半日(12時間)</th>
+    <td>￥1,500</td>
+    <td>￥3,000</td>
+    <td>￥4,000</td>
+    <td>￥5,000</td>
+  </tr>
+  <tr>
+    <th>一時預かり(6時間)</th>
+    <td>￥1,000</td>
+    <td>￥2,000</td>
+    <td>￥3,000</td>
+    <td>￥4,000</td>
+  </tr>
+  <tr>
+    <th>延長(1時間)</th>
+    <td>￥500</td>
+    <td>￥500</td>
+    <td>￥700</td>
+    <td>￥1,000</td>
+  </tr>
+</table>
+<div class="hotel-price__accordion">
+  <ul>
+    <li>
+      <button class="hotel-price__title-row">
+        <p>一泊(24時間)</p>
+      </button>
+      <div class="hotel-price__item-txtbox">
+        <div class="hotel-price__item-txt">
+          <p class="hotel-price__item-name">猫</p>
+          <p class="hotel-price__item-price">￥3,000</p>
+        </div>
+        <div class="hotel-price__item-txt">
+          <p class="hotel-price__item-name">小型犬</p>
+          <p class="hotel-price__item-price">￥4,000</p>
+        </div>
+        <div class="hotel-price__item-txt">
+          <p class="hotel-price__item-name">中型犬</p>
+          <p class="hotel-price__item-price">￥5,000</p>
+        </div>
+        <div class="hotel-price__item-txt">
+          <p class="hotel-price__item-name">大型犬</p>
+          <p class="hotel-price__item-price">￥6,000</p>
+        </div>
+      </div>
+    </li>
+    <li>
+      <button class="hotel-price__title-row">
+        <p>半日(12時間)</p>
+      </button>
+      <div class="hotel-price__item-txtbox">
+        <div class="hotel-price__item-txt">
+          <p class="hotel-price__item-name">猫</p>
+          <p class="hotel-price__item-price">￥1,500</p>
+        </div>
+        <div class="hotel-price__item-txt">
+          <p class="hotel-price__item-name">小型犬</p>
+          <p class="hotel-price__item-price">￥3,000</p>
+        </div>
+        <div class="hotel-price__item-txt">
+          <p class="hotel-price__item-name">中型犬</p>
+          <p class="hotel-price__item-price">￥4,000</p>
+        </div>
+        <div class="hotel-price__item-txt">
+          <p class="hotel-price__item-name">大型犬</p>
+          <p class="hotel-price__item-price">￥5,000</p>
+        </div>
+      </div>
+    </li>
+    <li>
+      <button class="hotel-price__title-row">
+        <p>一時預かり(6時間)</p>
+      </button>
+      <div class="hotel-price__item-txtbox">
+        <div class="hotel-price__item-txt">
+          <p class="hotel-price__item-name">猫</p>
+          <p class="hotel-price__item-price">￥1,000</p>
+        </div>
+        <div class="hotel-price__item-txt">
+          <p class="hotel-price__item-name">小型犬</p>
+          <p class="hotel-price__item-price">￥2,000</p>
+        </div>
+        <div class="hotel-price__item-txt">
+          <p class="hotel-price__item-name">中型犬</p>
+          <p class="hotel-price__item-price">￥3,000</p>
+        </div>
+        <div class="hotel-price__item-txt">
+          <p class="hotel-price__item-name">大型犬</p>
+          <p class="hotel-price__item-price">￥4,000</p>
+        </div>
+      </div>
+    </li>
+    <li>
+      <button class="hotel-price__title-row">
+        <p>延長(1時間)</p>
+      </button>
+      <div class="hotel-price__item-txtbox">
+        <div class="hotel-price__item-txt">
+          <p class="hotel-price__item-name">猫</p>
+          <p class="hotel-price__item-price">￥500</p>
+        </div>
+        <div class="hotel-price__item-txt">
+          <p class="hotel-price__item-name">小型犬</p>
+          <p class="hotel-price__item-price">￥500</p>
+        </div>
+        <div class="hotel-price__item-txt">
+          <p class="hotel-price__item-name">中型犬</p>
+          <p class="hotel-price__item-price">￥700</p>
+        </div>
+        <div class="hotel-price__item-txt">
+          <p class="hotel-price__item-name">大型犬</p>
+          <p class="hotel-price__item-price">￥1,000</p>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<style>
+.hotel-price__pc-table {
+  width: 100%;
+  max-width: 80.0rem;
+  background-color: #fff;
+  text-align: center;
+  border-collapse: collapse;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 0 auto 4.0rem;
+
+  tr:nth-child(1) {
+    color: #ffffff;
+    background-color: #C37380;
+  }
+  th,
+  td {
+    padding: 1.4rem 0 1.2rem;
+    border: 1px solid #B24759;
+    font-weight: 400;
+  }
+  tr:nth-child(1) th,
+  tr:nth-child(1) td {
+    border-top: none;
+  }
+  tr:last-child th,
+  tr:last-child td {
+    border-bottom: none;
+  }
+  
+  td:last-child {
+    border-right: none;
+  }
+  th {
+    width: 25%;
+    border-left: none;
+  }
+}
+.hotel-price__accordion {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .hotel-price__pc-table {
+    display: none;
+  }
+  .hotel-price__accordion {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    max-width: 56rem;
+    background-color: #fff;
+    text-align: center;
+    border-radius: 16px;
+    overflow: hidden;
+    margin: 0 auto 2.4rem;
+
+    .hotel-price__title-row {
+      position: relative;
+      display: block;
+      width: 100%;
+      background-color: #C37380;
+      color: #ffffff;
+      font-weight: 500;
+      padding: .8rem 0;
+      cursor: pointer;
+
+      &::before,
+      &::after {
+        position: absolute;
+        content:'';
+        width: 1.6rem;
+        height: 2px;
+        background-color: #fff;
+        top:48%;
+        right: 1.6rem;
+      }
+      &::before {
+        transform: rotate(0deg);
+      }
+      &::after {
+        transform: rotate(90deg);
+        transition: .3s;
+      }
+      &.close::before,
+      &.close::after {
+          transform: rotate(0deg);
+      }
+    }
+    .hotel-price__item-txtbox {
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+      transition: max-height 0.4s ease, opacity 0.4s ease, padding 0.4s ease;
+
+      &.open {
+          max-height: 80.0rem;
+          opacity: 1;
+        }
+      .hotel-price__item-txt {
+        display: flex;
+        justify-content: space-between;
+        padding: .8rem 16%;
+        border-top: 1px solid #B24759;
+
+        .hotel-price__item-name {
+          font-weight: 500;
+        }
+        .hotel-price__item-price {
+
+        }
+      }
+    }
+  }
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const buttons = document.querySelectorAll('.hotel-price__title-row');
+
+  buttons.forEach((button, index) => {
+    const content = button.nextElementSibling;
+
+    // ▼ 最初のアコーディオンを開いた状態にする
+    if (index === 0) {
+      content.classList.add('open');
+      button.classList.add('close');
+    }
+
+    // ▼ クリックしたときの動作
+    button.addEventListener('click', () => {
+
+      if (content.classList.contains('open')) {
+        // 閉じる
+        content.classList.remove('open');
+        button.classList.remove('close');
+      } else {
+        // 開く
+        content.classList.add('open');
+        button.classList.add('close');
+      }
+    });
+  });
+});
+</script>
