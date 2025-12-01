@@ -21,7 +21,7 @@ const currentPath = Astro.url.pathname;
           : currentPath.startsWith(item.path);
       return (
         <li>
-          <a href={item.path} class={isActive ? "active" : ""}>{item.label}</a>
+          <a href={Astro.resolve(item.path)} class={isActive ? "active" : ""}>{item.label}</a>
         </li>
       );
     })}
