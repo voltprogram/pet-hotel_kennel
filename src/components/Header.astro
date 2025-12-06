@@ -336,10 +336,48 @@ const engName = "PET HOTEL KENNEL"
 <script is:client>
   const hamburger = document.querySelector(".hamburger");
   const headerBottom = document.querySelector(".header__bottom");
-  const lines = document.querySelector(".hamburger__line");
 
-  hamburger.addEventListener("click", () => {
-    hamburger.classList.toggle("is-active");
-    headerBottom.classList.toggle("open");
-  });
+  if (hamburger && headerBottom) {
+
+    // メニューを閉じる処理を関数化
+    const closeMenu = () => {
+      hamburger.classList.remove("is-active");
+      headerBottom.classList.remove("open");
+      // もし body に固定スクロールを付けているならここで解除
+      // document.body.classList.remove("is-fixed");
+    };
+
+    // ハンバーガー開閉
+    hamburger.addEventListener("click", () => {
+      hamburger.classList.toggle("is-active");
+      headerBottom.classList.toggle("open");
+      // body 固定しているならここで切り替え
+      // document.body.classList.toggle("is-fixed");
+    });
+
+    // メニュー内の「#」リンクを押したらメニューを閉じる
+    const anchorLinks = headerBottom.querySelectorAll('a[href^="#"]');
+
+    anchorLinks.forEach((anchor) => {
+      anchor.addEventListener("click", (event) => {
+        const href = anchor.getAttribute("href") || "";
+
+        // ブラウザ標準のアンカー移動に任せる場合
+        closeMenu();
+        // ↑これだけでも「メニューを閉じた時にはすでにスクロール済み」が解消されやすいです
+
+        // もし「自分でスクロール制御」したいなら↓のようにする：
+        /*
+        event.preventDefault();
+        const target = document.querySelector(href);
+        closeMenu();
+        if (target) {
+          setTimeout(() => {
+            target.scrollIntoView({ behavior: "smooth" });
+          }, 300); // メニュー閉じアニメ時間に合わせて調整
+        }
+        */
+      });
+    });
+  }
 </script>
