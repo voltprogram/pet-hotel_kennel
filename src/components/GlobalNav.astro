@@ -2,26 +2,42 @@
 const { variant = "header" } = Astro.props;
 
 const navItems = [
-  { label: '御利用にあたって', path: '/use'},
-  { label: '料金', path: '/price'},
-  // { label: '予約状況', path: '/reserve'},
-  { label: 'アクセス', path: '#access'},
-  { label: '利用規約', path: '/agreement'},
+  { label: '御利用にあたって', path: '/use' },
+  { label: '料金', path: '/price' },
+  { label: 'アクセス', path: '#access' },
+  { label: '利用規約', path: '/agreement' },
 ];
 
 const currentPath = Astro.url.pathname;
+
+// トップページ判定（base配信・通常どちらも対応）
+const isTopPage =
+  currentPath === '/' ||
+  currentPath === import.meta.env.BASE_URL ||
+  currentPath === import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <nav class={`global__nav ${variant}`}>
   <ul>
     {navItems.map((item) => {
+      const isAnchor = item.path.startsWith('#');
+
+      const href = isAnchor
+        ? isTopPage
+          ? '#access' // トップ → ページ内スクロール
+          : `${import.meta.env.BASE_URL}#access` // 下層 → トップへ遷移
+        : `${import.meta.env.BASE_URL}${item.path.replace(/^\//, '')}`;
+
       const isActive =
         item.path === "/"
           ? currentPath === item.path
           : currentPath.startsWith(item.path);
+
       return (
         <li>
-          <a href={item.path.startsWith('#') ? item.path : `${import.meta.env.BASE_URL}${item.path.replace(/^\//, '')}`}class={isActive ? "active" : ""}>{item.label}</a>
+          <a href={href} class={isActive ? "active" : ""}>
+            {item.label}
+          </a>
         </li>
       );
     })}
