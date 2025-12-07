@@ -12,7 +12,7 @@ const engName = "PET HOTEL KENNEL"
   <div class="header__top">
     <a class="header__logo-content" href={`${import.meta.env.BASE_URL}`}>
       <img src={HeaderLogo.src} width={HeaderLogo.width} height={HeaderLogo.height} alt="犬寝ロゴ" decoding="async">
-      <h1>{ name }<span>{ engName }</span></h1>
+      <h1><span>{ engName }</span>{ name }</h1>
     </a>
     <div class="btn__pc-content">
       <div class="tel__btn">
@@ -67,7 +67,7 @@ const engName = "PET HOTEL KENNEL"
       position: relative;
       display: flex;
       align-items: center;
-      gap: .8rem;
+      gap: 1.6rem;
       transition: .3s ease;
       z-index: 1000;
 
@@ -90,6 +90,7 @@ const engName = "PET HOTEL KENNEL"
         font-weight: 500;
         font-variation-settings: "wght" 400;
         color: #333333;
+        margin-bottom: -.4rem;
       }
     }
     .btn__pc-content {
