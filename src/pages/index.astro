@@ -9,6 +9,43 @@ import FvImg from "@/assets/img/fv-img01.jpg";
 import UseImg from "@/assets/img/use-img01.jpg";
 import InfoImg from "@/assets/img/store-img.jpg";
 
+import ReservationList from '../components/ReservationList.astro';
+import { getCalendarCells } from '../lib/calendar';
+import { client } from '../lib/microcms';
+import ScheduleText from "@/components/ScheduleText.astro";
+
+const { contents } = await client.get({ endpoint: 'reservation' });
+
+const reservations = Object.fromEntries(
+  contents.map(item => {
+    const d = new Date(item.date);
+    d.setHours(d.getHours() + 9); // JST補正
+    const key = d.toISOString().split('T')[0];
+    return [key, item.status];
+  })
+);
+// dateは YYYY-MM-DD（テキスト型 or JST変換済み前提）
+// const reservations = Object.fromEntries(
+//   contents.map(item => [item.date, item.status])
+// );
+
+const now = new Date();
+const year = now.getFullYear();
+const month = now.getMonth(); // 0 = 1月, 11 = 12月
+
+// 今月
+const thisMonthDate = new Date(year, month, 1);
+const thisMonthLabel = `${thisMonthDate.getFullYear()}年${thisMonthDate.getMonth() + 1}月`;
+
+// 来月（年またぎも含めて自動で計算される）
+const nextDate = new Date(year, month + 1, 1);
+const nextYear = nextDate.getFullYear();
+const nextMonth = nextDate.getMonth(); // 0–11
+const nextMonthLabel = `${nextYear}年${nextMonth + 1}月`;
+
+// カレンダー用データ
+const thisMonthCells = getCalendarCells(thisMonthDate.getFullYear(), thisMonthDate.getMonth());
+const nextMonthCells = getCalendarCells(nextYear, nextMonth);
 ---
 
 <BaseLayout title="ペットホテル犬寝｜山梨県笛吹市八代町北｜営業時間 6:00~21:00" description="山梨県笛吹市八代町北にあるペットホテル犬寝は、営業時間6:00〜21:00まで営業しています。常にオーナーが常駐しているため、安心して御利用いただけます。また、ワンちゃんの状態に合わせたお散歩時間や、お手入れ込みのシャンプーなど充実したサービスがありますので、ぜひ御利用ください。">
@@ -75,6 +112,35 @@ import InfoImg from "@/assets/img/store-img.jpg";
 					variant="price"
 				/>
 			</div>
+		</div>
+	</section>
+	<section id="reservation-top">
+		<div class="container">
+			<SectionTitle
+					main="予約状況"
+					sub="schedule"
+					subAlign="center"
+			/>
+			<div class="reservation-top__content">
+				<ReservationList
+					title={`${year}年${month + 1}月`}
+					items={thisMonthCells}
+					reservations={reservations}
+				/>
+				<ReservationList
+					title={`${nextYear}年${nextMonth + 1}月`}
+					items={nextMonthCells}
+					reservations={reservations}
+				/>
+			</div>
+			<div class="schedule__txt-inner">
+				<ScheduleText />
+			</div>
+			<SectionBtn
+				label="ご予約について詳細"
+				href="/schedule"
+				variant="reservation-status"
+			/>
 		</div>
 	</section>
 	<section id="info">
@@ -159,7 +225,6 @@ import InfoImg from "@/assets/img/store-img.jpg";
 	}
 }
 #use {
-	background-color: #C6D2C2;
 	padding: 8.0rem 0;
 
 	.use__content {
@@ -198,7 +263,8 @@ import InfoImg from "@/assets/img/store-img.jpg";
 	}
 }
 #price {
-	margin: 8rem 0;
+	background-color: #C6D2C2;
+	padding: 8.0rem 0;
 
 	.price__content {
 		display: flex;
@@ -219,6 +285,21 @@ import InfoImg from "@/assets/img/store-img.jpg";
 			font-size: 1.6rem;
 			margin-bottom: 4.0rem;
 		}
+	}
+}
+#reservation-top {
+	margin: 8rem 0;
+	text-align: center;
+	.reservation-top__content {
+		display: flex;
+		justify-content: center;
+		gap: 8rem;
+		margin-bottom: 2.4rem;
+	}
+	.schedule__txt-inner {
+		width: 100%;
+		max-width: 80rem;
+		margin: 0 auto;
 	}
 }
 #info {
@@ -312,7 +393,7 @@ import InfoImg from "@/assets/img/store-img.jpg";
 
 @media screen and (max-width: 768px) {
 	#fv {
-		margin: 1.6rem 0;
+		margin: 1.6rem 0 0;
 		padding: 0 calc( 5 / 375 * 100%);
 
 		.fv__img {
@@ -374,7 +455,7 @@ import InfoImg from "@/assets/img/store-img.jpg";
 		}
 	}
 	#price {
-		margin: 4rem 0;
+		padding: 4rem 0;
 
 		.price__content {
 
@@ -391,6 +472,21 @@ import InfoImg from "@/assets/img/store-img.jpg";
 				font-size: 1.4rem;
 				margin-bottom: 2.4rem;
 			}
+		}
+	}
+	#reservation-top {
+		margin: 4rem 0;
+		.reservation-top__content {
+			display: flex;
+			flex-flow: column;
+			justify-content: center;
+			gap: 4rem;
+			margin-bottom: 1.6rem;
+		}
+		.schedule__txt-inner {
+			width: 100%;
+			max-width: 60rem;
+			margin: 0 auto;
 		}
 	}
 	#info {

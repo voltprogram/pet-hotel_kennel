@@ -1,0 +1,353 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageTitle from "@/components/PageTitle.astro";
+import TextTitle from "@/components/TextTitle.astro"
+import ReservationList from "@/components/ReservationList.astro";
+import { getCalendarCells } from "@/lib/calendar";
+import { client } from "@/lib/microcms";
+import ScheduleText from "@/components/ScheduleText.astro";
+
+// 今日
+const now = new Date();
+const baseYear = now.getFullYear();
+const baseMonth = now.getMonth(); // 0=1月
+
+// microCMS から予約データ取得
+const { contents } = await client.get({ endpoint: "reservation" });
+
+// "YYYY-MM-DD" → status のマップ
+const reservations: Record<string, string> = Object.fromEntries(
+  contents.map((item: any) => [item.date, item.status])
+);
+
+// 何ヶ月分表示するか（例：今月含めて6ヶ月）
+const MONTH_COUNT = 24;
+
+// 今月から先のカレンダー情報をまとめて作る
+type CalendarInfo = {
+  year: number;
+  month: number; // 0-11
+  label: string;
+  items: { date: string; isOtherMonth: boolean }[];
+};
+
+const calendars: CalendarInfo[] = [];
+
+for (let i = 0; i < MONTH_COUNT; i++) {
+  const d = new Date(baseYear, baseMonth + i, 1);
+  const year = d.getFullYear();
+  const month = d.getMonth(); // 0-11
+  const label = `${year}年${month + 1}月`;
+
+  const items = getCalendarCells(year, month);
+
+  calendars.push({ year, month, label, items });
+}
+---
+
+<BaseLayout title="予約状況｜ペットホテル犬寝" description="サービス内容は、宿泊、お預かり、一時お預かり、お散歩、シャンプー、お手入れ(爪切り、肛門腺絞り、足裏バリカン、耳掃除、肉球ケア、マッサージ)、など様々なサービスを取り揃えておりますので、御不明点や気になる点がございましたらお気軽にお問い合わせください。">
+  <div id="schedule__pages">
+    <div class="container">
+      <PageTitle
+        title="御予約について"
+      />
+      <p class="price-page__txt">
+        各サービスは予約制となっております。お電話での受付時間は6:00〜21:00まで、LINEでの受付は24時間になります。<br class="pc__only">
+        時間帯によっては希望の時間帯が埋まってしまう可能性がありますので、早めに御予約をお願い致します。<br class="pc__only">
+        御予約の御連絡が状況によっては出られない場合もありますが、必ず折り返し御連絡をさせて頂きます。<br class="pc__only">
+        当ホテルでは事前に御予約が無い日を店舗の休日とさせて頂きますので、当日予約の場合お受けできない場合がありますので御注意下さい。<br class="pc__only">
+        お預かり時間には、お会計や、当ホテルのシステム説明、契約などの時間は含まれません。
+      </p>
+      <TextTitle
+        title="予約状況"
+      />
+      <div class="schedule__inner">
+        <div class="reservation-nav">
+          <button
+            type="button"
+            class="nav-btn nav-btn--prev"
+            data-cal-prev
+          >
+            前の月
+          </button>
+          <div class="month-picker">
+            <span class="month-picker__label">表示月を選択</span>
+            <select class="month-picker__select" data-cal-select>
+              {calendars.map((cal, index) => (
+                <option value={index}>
+                  {cal.label}
+                </option>
+              ))}
+            </select>
+          </div>
+          <button
+            type="button"
+            class="nav-btn nav-btn--next"
+            data-cal-next
+          >
+            次の月
+          </button>
+        </div>
+        <div class="reservation-months">
+          {calendars.map((cal, index) => (
+            <section
+              class={`reservation-month ${index === 0 ? "is-active" : ""}`}
+              data-cal-index={index}
+              aria-hidden={index === 0 ? "false" : "true"}
+            >
+              <ReservationList
+                title={cal.label}
+                items={cal.items}
+                reservations={reservations}
+              />
+            </section>
+          ))}
+        </div>
+        <ScheduleText />
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const monthEls = Array.from(
+        document.querySelectorAll("[data-cal-index]")
+      );
+      const prevBtn = document.querySelector("[data-cal-prev]");
+      const nextBtn = document.querySelector("[data-cal-next]");
+      const selectEl = document.querySelector("[data-cal-select]");
+
+      if (!monthEls.length || !prevBtn || !nextBtn || !selectEl) return;
+
+      let currentIndex = 0;
+      const maxIndex = monthEls.length - 1;
+
+      const updateView = () => {
+        monthEls.forEach((el, i) => {
+          const isActive = i === currentIndex;
+          el.classList.toggle("is-active", isActive);
+          el.setAttribute("aria-hidden", isActive ? "false" : "true");
+        });
+
+        // ボタンの有効/無効
+        prevBtn.disabled = currentIndex === 0;        // ← 過去の月には戻れない
+        nextBtn.disabled = currentIndex === maxIndex; // 最後の月より先にも進めない
+
+        // セレクトの表示も同期
+        selectEl.value = String(currentIndex);
+      };
+
+      prevBtn.addEventListener("click", () => {
+        if (currentIndex > 0) {
+          currentIndex--;
+          updateView();
+        }
+      });
+
+      nextBtn.addEventListener("click", () => {
+        if (currentIndex < maxIndex) {
+          currentIndex++;
+          updateView();
+        }
+      });
+
+      // 🔹 月ジャンプ：セレクト変更で一気にその月へ
+      selectEl.addEventListener("change", (e) => {
+        const targetIndex = Number(e.target.value);
+        if (!Number.isNaN(targetIndex)) {
+          currentIndex = targetIndex;
+          updateView();
+        }
+      });
+
+      updateView();
+    });
+  </script>
+</BaseLayout>
+
+<style>
+#schedule__pages {
+  width: 100%;
+  margin: 8rem 0;
+}
+.price-page__txt {
+  margin-bottom: 5.6rem;
+}
+.schedule__inner {
+  width: 100%;
+  max-width: 80rem;
+  margin: 0 auto;
+}
+.day-cell.is-past {
+  background: #eeeeee;
+  color: #999999;
+}
+.day-cell.is-past .status {
+  opacity: 0.5;
+}
+.reservation-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 1.6rem;
+}
+.nav-btn {
+  height: 4rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background: #fff;
+  cursor: pointer;
+  font-size: 1.6rem;
+}
+.nav-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.nav-btn--prev {
+  position: relative;
+  padding: 0 .8rem 0 3.2rem;
+}
+.nav-btn--prev::before,
+.nav-btn--prev::after  {
+  content: '';
+  position: absolute;
+  display: inline-block;
+  border-radius: 2px;
+  left: 1.2rem;
+	width: .8rem;
+	height: 2px;
+  background-color: #333333;
+}
+.nav-btn--prev::before {
+  top: calc(50% - 3px);
+  transform: rotate(-45deg);
+}
+.nav-btn--prev::after {
+  bottom: calc(50% - 3px);
+  transform: rotate(45deg);
+}
+.nav-btn--next {
+  position: relative;
+  padding: 0 3.2rem 0 .8rem;
+}
+.nav-btn--next::before,
+.nav-btn--next::after  {
+  content: '';
+  position: absolute;
+  display: inline-block;
+  border-radius: 2px;
+  right: 1.2rem;
+	width: .8rem;
+	height: 2px;
+  background-color: #333333;
+}
+.nav-btn--next::before {
+  top: calc(50% - 3px);
+  transform: rotate(45deg);
+}
+.nav-btn--next::after {
+  bottom: calc(50% - 3px);
+  transform: rotate(-45deg);
+}
+.month-picker {
+  position: relative;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  gap: 8px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+.month-picker__label {
+  font-size: 1.4rem;
+}
+.month-picker__select {
+  height: 4rem;
+  padding: 0 2.4rem;
+  border-radius: 4px;
+  border: 1px solid #aaa;
+  background: #fff;
+  font-size: 1.6rem;
+  cursor: pointer;
+}
+.month-picker::before,
+.month-picker::after {
+  content: '';
+  position: absolute;
+  bottom: 1.8rem;
+  width: 0.8rem;
+  height: 2px;
+  background: #333;
+  border-radius: 2px;
+  pointer-events: none;
+}
+.month-picker::before {
+  right: 1.3rem;
+  transform: rotate(-45deg);
+}
+.month-picker::after {
+  right: 1.7rem;
+  transform: rotate(45deg);
+}
+.reservation-month {
+  display: none;
+  margin: 0 auto 4rem;
+}
+.reservation-month.is-active {
+  display: block;
+}
+.calendar-notes {
+  margin-top: 16px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+@media screen and (max-width: 768px) {
+  #schedule__pages {
+    margin: 4rem 0;
+  }
+  .price-page__txt {
+    margin-bottom: 2.4rem;
+  }
+  .reservation-nav {
+    margin-bottom: .8rem;
+  }
+  .nav-btn {
+    height: 3.2rem;
+    font-size: 1.4rem;
+  }
+  .nav-btn--prev {
+    padding: 0 .8rem 0 2.4rem;
+  }
+  .nav-btn--prev::before,
+  .nav-btn--prev::after  {
+    left: .8rem;
+  }
+  .nav-btn--next {
+    padding: 0 2.4rem 0 .8rem;
+  }
+  .nav-btn--next::before,
+  .nav-btn--next::after  {
+    right: .8rem;
+  }
+  .month-picker {
+    gap: 4px;
+  }
+  .month-picker__label {
+    font-size: 1.2rem;
+  }
+  .month-picker__select {
+    height: 3.2rem;
+    padding: 0 2rem;
+    font-size: 1.4rem;
+  }
+  .month-picker::before,
+  .month-picker::after {
+    bottom: 1.4rem;
+  }
+  .reservation-month {
+    margin: 0 auto 1.6rem;
+  }
+}
+</style>

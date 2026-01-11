@@ -1,0 +1,106 @@
+---
+
+---
+
+<ul class="schedule__txt-content">
+  <div class="schedule__available-item">
+    <p class="schedule__available-title"><span class="status-available">○</span>予約可能</p>
+    <p class="schedule__available-txt">
+      十分な空きがあります。御希望の日程で御予約いただけます。
+    </p>
+  </div>
+  <div class="schedule__limited-item">
+    <p class="schedule__limited-title"><span class="status-limited">△</span>要相談（残りわずか）</p>
+    <p class="schedule__limited-txt">
+      受け入れ可能な頭数に限りがあります。空き状況確認のため、一度御連絡ください。
+    </p>
+  </div>
+  <div class="schedule__full-item">
+    <p class="schedule__full-title"><span class="status-full">✕</span>予約不可</p>
+    <p class="schedule__full-txt">
+      いっぱいのためお受けできません。別日を御検討ください。
+    </p>
+  </div>
+</ul>
+
+<style>
+.schedule__txt-content {
+  width: 100%;
+  margin: 0 auto 4rem;
+  text-align: left;
+}
+.schedule__available-item,
+.schedule__limited-item {
+  margin-bottom: 1.6rem;
+}
+.schedule__available-title,
+.schedule__limited-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: .4rem;
+}
+.status-available {
+  color: #2e7d32;
+  font-size: 2.4rem;
+  margin-right: .8rem;
+}
+.status-limited {
+  color: #f9a825;
+  font-size: 2.4rem;
+  margin-right: .8rem;
+}
+.status-full {
+  color: #d32f2f;
+  font-size: 2.4rem;
+  margin-right: .8rem;
+}
+.schedule__available-txt,
+.schedule__limited-txt,
+.schedule__full-txt {
+  font-size: 1.6rem;
+}
+.schedule__full-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: .4rem;
+}
+
+@media screen and (max-width: 768px) {
+  .schedule__txt-content {
+    margin: 0 auto 2.4rem;
+  }
+  .schedule__available-item,
+  .schedule__limited-item {
+    margin-bottom: .8rem;
+  }
+  .schedule__available-title,
+  .schedule__limited-title {
+    font-size: 1.6rem;
+    margin-bottom: 0;
+  }
+  .status-available {
+    color: #2e7d32;
+    font-size: 2rem;
+    margin-right: .4rem;
+  }
+  .status-limited {
+    color: #f9a825;
+    font-size: 2rem;
+    margin-right: .4rem;
+  }
+  .status-full {
+    color: #d32f2f;
+    font-size: 2rem;
+    margin-right: .4rem;
+  }
+  .schedule__available-txt,
+  .schedule__limited-txt,
+  .schedule__full-txt {
+    font-size: 1.4rem;
+  }
+  .schedule__full-title {
+    font-size: 1.6rem;
+    margin-bottom: 0;
+  }
+}
+</style>

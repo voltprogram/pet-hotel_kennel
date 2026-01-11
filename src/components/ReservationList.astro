@@ -1,0 +1,223 @@
+---
+interface Props {
+  title: string;
+  items: { date: string; isOtherMonth: boolean }[];
+  reservations: Record<string, string>;
+}
+
+const { title, items, reservations } = Astro.props as Props;
+
+// 記号
+const statusMap: Record<string, string> = {
+  available: '○',
+  limited: '△',
+  full: '✕',
+};
+
+// 曜日（※日曜始まり）
+const weekdays = ['日', '月', '火', '水', '木', '金', '土'];
+
+// 今日（時刻リセットして日付だけ比較）
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+
+// 🔹 表示用の年・月を items から自動算出
+//   まず当月セル（isOtherMonth=false）を探す。なければ先頭を使う
+const baseCell = items.find((cell) => !cell.isOtherMonth) ?? items[0];
+
+let displayYear = '';
+let displayMonth = '';
+
+if (baseCell) {
+  const [y, m] = baseCell.date.split('-').map(Number);
+  displayYear = String(y);
+  displayMonth = String(m); // 1〜12
+}
+---
+<div class="reservation-2month">
+  <h3 class="calendar-title">
+    <span class="year-txt">{displayYear}年</span>
+    <span class="month-txt"><span class="month-num">{displayMonth}</span>月</span>
+  </h3>
+
+  <!-- 曜日 -->
+  <ul class="calendar-week">
+    {weekdays.map((day, i) => (
+      <li class={`week ${i === 0 ? 'sun' : ''} ${i === 6 ? 'sat' : ''}`}>
+        {day}
+      </li>
+    ))}
+  </ul>
+
+  <!-- 日付 -->
+  <ul class="calendar-grid">
+    {items.map((cell) => {
+      const [y, m, d] = cell.date.split('-').map(Number);
+      const dateObj = new Date(y, m - 1, d);
+      dateObj.setHours(0, 0, 0, 0);
+
+      const isPast = dateObj < today;
+
+      const dayOfWeek = dateObj.getDay();
+      const dayClass =
+        dayOfWeek === 0
+          ? 'sun'
+          : dayOfWeek === 6
+          ? 'sat'
+          : '';
+
+      return (
+        <li
+          class={`day-cell ${dayClass} ${isPast ? 'is-past' : ''} ${
+            cell.isOtherMonth ? 'is-other' : ''
+          }`}
+        >
+          <span class="day-number">{d}</span>
+
+          {!cell.isOtherMonth && (
+            <span
+              class={`status status-${reservations[cell.date] ?? 'available'}`}
+            >
+              {statusMap[reservations[cell.date] ?? 'available']}
+            </span>
+          )}
+        </li>
+      );
+    })}
+  </ul>
+</div>
+
+<style>
+.reservation-2month {
+  background-color: #ffffff;
+  width: 100%;
+  padding: 2.4rem 4rem 4rem;
+  border-radius: 20px;
+}
+.calendar-title {
+  display: flex;
+  align-items:first baseline;
+  position: relative;
+  margin-bottom: 4rem;
+  font-size: 2rem;
+  font-weight: bold;
+}
+.year-txt {
+  
+}
+.month-txt {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.month-num {
+  font-size: 4.8rem;
+  color: #B24759;
+  margin-right: .8rem;
+}
+.calendar-week,
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+.calendar-week {
+  margin-bottom: .4rem;
+}
+.week {
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 400;
+}
+.calendar-grid {
+  
+}
+.day-cell {
+  min-height: 8.6rem;
+  border: 1px solid #e0e0e0;
+  padding: .6rem .4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffffff;
+}
+.day-cell.is-empty {
+  background: transparent;
+  border: none;
+}
+.day-number {
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+.status {
+  font-size: 3.2rem; 
+}
+.week.sun {
+  color: #d32f2f; /* 赤 */
+}
+.week.sat {
+  color: #1976d2; /* 青 */
+}
+.day-cell.sun {
+  background: #fff5f5;
+}
+.day-cell.sat {
+  background: #f5f8ff;
+}
+.day-cell.sun .day-number {
+  color: #d32f2f;
+}
+.day-cell.sat .day-number {
+  color: #1976d2;
+}
+.day-cell.is-past {
+  background: #eeeeee;
+  color: #999999;
+}
+.day-cell.is-past .status {
+  opacity: 0.5;
+}
+.day-cell.is-other {
+  background: #f5f5f5;
+  color: #bbbbbb;
+}
+.day-cell.is-other .status {
+  display: none;
+}
+.status-available {
+  color: #2e7d32;
+}
+.status-limited {
+  color: #f9a825;
+}
+.status-full {
+  color: #d32f2f;
+}
+
+@media screen and (max-width: 769px) {
+  .reservation-2month {
+    padding: 1.6rem 2.4rem 2.4rem;
+    border-radius: 12px;
+  }
+  .calendar-title {
+    margin-bottom: 4rem;
+    font-size: 1.4rem;
+  }
+  .month-num {
+    font-size: 3.2rem;
+    margin-right: .4rem;
+  }
+  .week {
+    font-size: 1.4rem;
+  }
+  .day-cell {
+    min-height: 6rem;
+  }
+  .day-number {
+    font-size: 1.4rem;
+  }
+  .status {
+    font-size: 2.4rem; 
+  }
+}
+</style>
