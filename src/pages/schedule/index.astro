@@ -339,13 +339,19 @@ for (let i = 0; i < MONTH_COUNT; i++) {
   }
   .month-picker__select {
     height: 3.2rem;
-    padding: 0 2rem;
+    padding: 0 2rem 0 .8rem;
     font-size: 1.4rem;
   }
   .month-picker::before,
   .month-picker::after {
     bottom: 1.4rem;
   }
+  .month-picker::before {
+  right: .8rem;
+}
+.month-picker::after {
+  right: 1.2rem;
+}
   .reservation-month {
     margin: 0 auto 1.6rem;
   }
