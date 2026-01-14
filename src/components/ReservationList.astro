@@ -7,7 +7,7 @@ interface Props {
 
 const { title, items, reservations } = Astro.props as Props;
 
-// 記号
+// 記号（microCMSが ○/△/✕ に変わる予定なら、ここも合わせて後で調整）
 const statusMap: Record<string, string> = {
   available: '○',
   limited: '△',
@@ -17,12 +17,7 @@ const statusMap: Record<string, string> = {
 // 曜日（※日曜始まり）
 const weekdays = ['日', '月', '火', '水', '木', '金', '土'];
 
-// 今日（時刻リセットして日付だけ比較）
-const today = new Date();
-today.setHours(0, 0, 0, 0);
-
-// 🔹 表示用の年・月を items から自動算出
-//   まず当月セル（isOtherMonth=false）を探す。なければ先頭を使う
+// 表示用の年・月を items から自動算出
 const baseCell = items.find((cell) => !cell.isOtherMonth) ?? items[0];
 
 let displayYear = '';
@@ -31,7 +26,7 @@ let displayMonth = '';
 if (baseCell) {
   const [y, m] = baseCell.date.split('-').map(Number);
   displayYear = String(y);
-  displayMonth = String(m); // 1〜12
+  displayMonth = String(m);
 }
 ---
 <div class="reservation-2month">
@@ -54,30 +49,22 @@ if (baseCell) {
     {items.map((cell) => {
       const [y, m, d] = cell.date.split('-').map(Number);
       const dateObj = new Date(y, m - 1, d);
-      dateObj.setHours(0, 0, 0, 0);
-
-      const isPast = dateObj < today;
-
       const dayOfWeek = dateObj.getDay();
       const dayClass =
-        dayOfWeek === 0
-          ? 'sun'
-          : dayOfWeek === 6
-          ? 'sat'
-          : '';
+        dayOfWeek === 0 ? 'sun' :
+        dayOfWeek === 6 ? 'sat' :
+        '';
 
       return (
         <li
-          class={`day-cell ${dayClass} ${isPast ? 'is-past' : ''} ${
-            cell.isOtherMonth ? 'is-other' : ''
-          }`}
+          class={`day-cell ${dayClass} ${cell.isOtherMonth ? 'is-other' : ''}`}
+          data-date={cell.date}
+          data-other={cell.isOtherMonth ? '1' : '0'}
         >
           <span class="day-number">{d}</span>
 
           {!cell.isOtherMonth && (
-            <span
-              class={`status status-${reservations[cell.date] ?? 'available'}`}
-            >
+            <span class={`status status-${reservations[cell.date] ?? 'available'}`}>
               {statusMap[reservations[cell.date] ?? 'available']}
             </span>
           )}
@@ -86,6 +73,32 @@ if (baseCell) {
     })}
   </ul>
 </div>
+
+<!-- ✅ ここで「過去日」判定を毎回クライアント側で付与 -->
+<script is:inline>
+  (() => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    document.querySelectorAll('.day-cell[data-date]').forEach((el) => {
+      // 他月セルは is-other でグレーにしているので、is-past は付けない（好みで変更可）
+      if (el.getAttribute('data-other') === '1') return;
+
+      const dateStr = el.getAttribute('data-date');
+      if (!dateStr) return;
+
+      const parts = dateStr.split('-').map(Number);
+      if (parts.length !== 3) return;
+
+      const [y, m, d] = parts;
+      const dateObj = new Date(y, m - 1, d);
+      dateObj.setHours(0, 0, 0, 0);
+
+      if (dateObj < today) el.classList.add('is-past');
+    });
+  })();
+</script>
+
 
 <style>
 .reservation-2month {
